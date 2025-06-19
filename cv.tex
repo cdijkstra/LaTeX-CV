@@ -1,4 +1,5 @@
 \documentclass[a4paper,8pt]{article}
+\usepackage[usenames,dvipsnames,table]{xcolor}
 \usepackage{ifsym}
 \usepackage{graphicx}
 \usepackage{marvosym}
@@ -6,10 +7,11 @@
 \usepackage{fontspec} 	
 %for loading fonts
 \usepackage{capt-of}
+\usepackage[most]{tcolorbox}
 \usepackage{xunicode,xltxtra,url,parskip} 	%other packages for formatting
 \RequirePackage{color,graphicx}
-\usepackage[usenames,dvipsnames]{xcolor}
 \usepackage[big]{layaureo} 				%better formatting of the A4 page
+% \usepackage{fullpage}
 % an alternative to Layaureo can be ** \usepackage{fullpage} **
 \usepackage{supertabular} 				%for Grades
 \usepackage{titlesec}					%custom \section
@@ -54,6 +56,57 @@ ItalicFont = Fontin-Italic.otf
                1 j 1 J -2 5 m 5 12 l 12 5 l S Q }%
    \kern 13pt}}
 
+% Work entry
+\newtcolorbox{jobbox}{
+  colback=gray!5,
+  colframe=gray!30,
+  boxrule=0.3pt,
+  arc=2mm,
+  left=6pt,
+  right=6pt,
+  top=5pt,
+  bottom=5pt,
+  enhanced,
+  sharp corners=south
+}
+
+
+% \newcommand{\workentry}[4]{%
+%   \textbf{#1} \hfill \textit{#2} \\
+%   \textit{#3} \\
+%   #4
+%   \vspace{0.8em}
+% }
+
+\newcommand{\workentry}[6]{%
+  \begin{jobbox}
+    {\color{RoyalBlue}\textbf{#1}} \hfill \textit{#2} \\[0.25em]
+    {\textit{#3}} \\[0.6em]
+    #4 \\[0.6em]
+    \textit{Responsibilities \& Achievements}
+    \begin{itemize}[leftmargin=1.2em, itemsep=0.3em]
+      #5
+    \end{itemize}
+    \vspace{0.5em}
+    \textit{Technologies:} #6
+  \end{jobbox}
+  \vspace{0.8em}
+}
+
+\newcommand{\workentryshort}[5]{%
+  \begin{jobbox}
+    {\color{RoyalBlue}\textbf{#1}} \hfill \textit{#2} \\[0.25em]
+    {\textit{#3}} \\[0.6em]
+    #4 \\[0.6em]
+    \vspace{0.5em}
+    \textit{Technologies:} #5
+  \end{jobbox}
+  \vspace{0.8em}
+}
+
+\newcommand{\tech}[1]{\fcolorbox{gray!30}{gray!10}{\footnotesize\texttt{#1}}}
+
+
 %--------------------BEGIN DOCUMENT----------------------
 \renewcommand{\labelitemi}{$\circ$}
 \begin{document}
@@ -88,7 +141,7 @@ ItalicFont = Fontin-Italic.otf
      \textifsymbol{18} & Beneluxlaan 128, \\ 
     & Utrecht, the Netherlands\\
      \Mobilefone   & 0636335440\\
-      \Letter   & \email{casperdijkstra92@gmail.com} & \\
+    \Letter   & \email{casperdijkstra92@gmail.com} & \\
 \end{tabular}
 	}
 %\bigskip\par}
@@ -97,88 +150,237 @@ ItalicFont = Fontin-Italic.otf
 %\vspace{1.5mm}
 %\centering
 \hspace*{-2.35cm}
-\includegraphics[width=0.85\textwidth]{casper.jpg}
+\includegraphics[width=0.95\textwidth]{casper.jpg}
 \end{minipage}
 
 %--------------------SECTIONS-----------------------------------
 %Section: Personal Data
-\section{Introduction}
+\section{\faUser\ Introduction}
 Complex problems that require both analytical and creative problem-solving skills are what I love to work on.
 Technological solutions that make the world a more sustainable, enjoyable, or affordable place are my favorites. My unique skillset involves .NET software development and Microsoft Azure but also mathematics and philosophy. I have seven years of experience as a software developer with different codebases and am knowledgeable about the features that Azure provides to run robust and highly available applications. 
 
 \noindent
 Besides hard skills I have developed invaluable soft skills including good collaboration skills (e.g. updating about the progress of PBIs, or asking for help if needed), staying calm when deadlines approach and am usually described as a very sociable and humorous person. I thrive in creative environments where knowledge-sharing is encouraged, challenging puzzles have to be solved that require critical thinking, and within a people-centric, non-hierarchic culture.
 
-\section{Work Experience}
-\textbf{Azure Cloud Engineer and Linux Engineer} (June 2024 - December 2024) \\
-Hogeschool van Amsterdam (Amsterdam), via \textbf{Freshminds} (Leiden) \\
-I migrated the OTAP environments of the main website of the applied university to secure Azure subscriptions, 
- where management group policies are enforced, and no Azure Policy security warnings remain.
- By doing this, I helped obtain a future-proof website for the HvA using Azure cloud best practices.\\
-\textit{Responsibilities \& Achievements}
-\begin{itemize}
-\item Migrate and harden cloud components to a Hub spoke architecture with company policies enabled and modifications only allowed through pipeline deployments.
-\item Infrastructure and microservice deployments have been automated in Gitlab CI/CD streets.
-\item Reduce the monthly cloud expenditure by 55\%.
-\item Ensure that databases can be recovered with a 12 hour recovery period.
-\item While on-prem Linux servers still receive Bloomreach traffic, ensure that they are available and work appropriately.
-\end{itemize}
-\textit{Technologies}: Azure Storage, SQL (PostgreSQL), NOSQL (Mongo Atlas),  GraphQL, Terraform, Bash Scripting, Gitlab, CI/CD, Ansible, Jenkins, Bloomreach,
-Kubernetes, Helm, GitOps (ArgoCD), Hub-spoke Architecture
+\section{\faTerminal\ Programming/IT Skills}
+\begin{tabular}{||p{5cm}|p{8cm}||}
+\hline
+Backend Programming: &  .NET (C\# 5.0+, MVC, CORE), Python, Git, Archimate \\
+\hline
+Frontend Programming: & HTML 5.0, CSS3, Svelte, Tailwind, Typescript, React \\
+\hline
+.NET:& Event Driven Architecture, Domain Driven Design, ASP.NET Identity, Microservices, Structured Logging, SignalR, Entity Framework, LINQ, Restful APIs, Razor, Blazor, XUnit, NUnit, MSTest, FluentAssertions \& Validations, SpecFlow, MOQ, Swagger, Polly, Pulumi \\
+\hline
+DevOps: & Azure Pipelines, Gitlab, Github Actions, CI\/CD, Git, Agile Scrum, Shell and Python scripting, SonarCloud, Whitesource, Ansible, Jenkins, IaC (Terraform, Bicep, ARM), Dashboards \\
+\hline
+Azure Cloud: & KeyVaults, Storage Accounts, App Services, Static Web Apps,
+Managed Identity, AD Active Directory (Entra), Azure
+Container Apps, ACR, AKS,
+Application Insights, Log Analytics Workspaces,
+SignalR, Service Bus, Event Hubs, Sendgrid, Redis,
+Azure Functions, Alerts and Action Groups, Logic Apps,
+SQL Server \& Elastic Pool, VNETs, Network Security Groups,
+Azure AI Search (Cognitive Search), Azure OpenAI Service \\
+\hline
+Containerization: & Docker, Kubernetes, AKS, ACR, Container Apps \\
+\hline
+Databases: & MSSQL, Snowflake, PostgreSQL, MySQL, GraphQL \\
+\hline
+UNIX: & Command-line utilities (e.g. \verb|grep|, \verb|locate|, \verb|awk|, \verb|sed|), File System Management, Package Management, System Administration \\
+\hline
+Tools \& IDEs: & Jetbrain Rider, Visual Studio (Code), Vim, Nano, Postman, Slack, Teams \\
+\hline
+Miscellaneous: & \LaTeX \\
+\hline
+\end{tabular}
 
-\textbf{Azure Cloud Developer} (December 2023 - May 2024) \\
-NS (Utrecht), via \textbf{Freshminds} (Leiden) \\
-  At team Pandas, we are responsible for robust and secure data storage at NS,
-  and sharing data among data teams when allowed. I helped in constructing and maintaining a modular solution for data teams to seamlessly set up data science projects, setting appropriate permissions on projects, and enabling teams to use Terraform and Azure Devops efficiently.
-  \textit{Responsibilities \& Achievements}
-  \begin{itemize}
+%Section: Scholarships and additional info
+\section{\faTrophy\ Certificates and licenses}
+My certificates can be found \hyperlink{https://www.credly.com/users/casper-dijkstra/badges}{here} and \hyperlink{https://learn.microsoft.com/en-us/users/casperdijkstra-0464/transcript/v2n6nap36zq90xk?tab=credentials-tab}{here}.
+
+\begin{tabular}{l l}
+HashiCorp Certified: Terraform Associate(003) & (HashiCorp, 2024) \\
+AI-102: Azure AI Engineer Associate & (Microsoft, 2024) \\
+AI-900: Azure AI Fundamentals & (Microsoft, 2024) \\
+DP-900: Microsoft Azure Data Fundamentals  &(Microsoft, 2024) \\
+Docker Certified Associate & (Docker, 2023) \\
+Linux Foundation Certified Systems Administrator & (Linux Foundation, 2023) \\
+CKAD: Certified Kubernetes Application Developer & (Linux Foundation, 2022) \\
+CKA: Certified Kubernetes Administrator & (Linux Foundation, 2022) \\
+HashiCorp Certified: Terraform Associate(002) &(HashiCorp, 2023) \\
+Azure Solutions Architect Expert & (Microsoft, 2022) \\
+AZ-305: Designing Microsoft Azure Infrastructure Solutions & (Microsoft, 2022) \\
+AZ-500: Azure Security Engineer Associate & (Microsoft, 2022) \\
+AZ-104 Microsoft Certified: Azure Developer Associate & (Microsoft, 2021) \\
+AZ-204: Azure Administrator Associate certification & (Microsoft, 2021) \\
+Microsoft Certified: DevOps Engineer Expert & (Microsoft, 2021) \\
+AZ-400: Designing and Implementing Microsoft DevOps Solutions & (Microsoft, 2021) \\
+    Driver's licence - A/B & (2019 \& 2010)
+\end{tabular}
+
+
+\section{\faBriefcase\ Work Experience}
+
+\workentry
+  {Azure Cloud Engineer and Linux Engineer}
+  {June 2024 -- December 2024}
+  {Hogeschool van Amsterdam (Amsterdam), via \textbf{Freshminds} (Leiden)}
+  {
+    Migrated the OTAP environments of the main website of the applied university to secure Azure subscriptions, 
+     where management group policies are enforced, and no Azure Policy security warnings remain.
+     By doing this, I helped obtain a future-proof website for the HvA using Azure cloud best practices.\\
+  }
+  {
+    \item Migrate and harden cloud components to a Hub spoke architecture with company policies enabled and modifications only allowed through pipeline deployments.
+    \item Infrastructure and microservice deployments have been automated in Gitlab CI/CD streets.
+    \item Reduce the monthly cloud expenditure by 55\%.
+    \item Ensure that databases can be recovered with a 12 hour recovery period.
+    \item While on-prem Linux servers still receive Bloomreach traffic, ensure that they are available and work appropriately.
+  }
+  {
+    \tech{Azure Storage}, 
+    \tech{SQL} (PostgreSQL), 
+    \tech{NOSQL} (Mongo Atlas), 
+    \tech{GraphQL}, 
+    \tech{Terraform}, 
+    \tech{Bash Scripting}, 
+    \tech{Gitlab}, 
+    \tech{CI/CD}, 
+    \tech{Ansible}, 
+    \tech{Jenkins}, 
+    \tech{Bloomreach}, 
+    \tech{Kubernetes}, 
+    \tech{Helm}, 
+    \tech{GitOps} (ArgoCD), 
+    \tech{Hub-spoke Architecture}
+  }
+
+% \textbf{Azure Cloud Engineer and Linux Engineer} (June 2024 - December 2024) \\
+% Hogeschool van Amsterdam (Amsterdam), via \textbf{Freshminds} (Leiden) \\
+% I migrated the OTAP environments of the main website of the applied university to secure Azure subscriptions, 
+%  where management group policies are enforced, and no Azure Policy security warnings remain.
+%  By doing this, I helped obtain a future-proof website for the HvA using Azure cloud best practices.\\
+% \textit{Responsibilities \& Achievements}
+% \begin{itemize}
+% \item Migrate and harden cloud components to a Hub spoke architecture with company policies enabled and modifications only allowed through pipeline deployments.
+% \item Infrastructure and microservice deployments have been automated in Gitlab CI/CD streets.
+% \item Reduce the monthly cloud expenditure by 55\%.
+% \item Ensure that databases can be recovered with a 12 hour recovery period.
+% \item While on-prem Linux servers still receive Bloomreach traffic, ensure that they are available and work appropriately.
+% \end{itemize}
+% \textit{Technologies}: Azure Storage, SQL (PostgreSQL), NOSQL (Mongo Atlas),  GraphQL, Terraform, Bash Scripting, Gitlab, CI/CD, Ansible, Jenkins, Bloomreach,
+% Kubernetes, Helm, GitOps (ArgoCD), Hub-spoke Architecture
+
+\workentry
+  {Azure Cloud Developer}
+  {December 2023 -- May 2024)}
+  {NS (Utrecht), via \textbf{Freshminds} (Leiden)}
+  {
+    At team Pandas, we are responsible for robust and secure data storage at NS,
+    and sharing data among data teams when allowed. I helped in constructing and maintaining a modular solution for data teams to seamlessly set up data science projects, setting appropriate permissions on projects, and enabling teams to use Terraform and Azure Devops efficiently.\\
+  }
+  {
     \item Implement C\# TUI application to simplify code changes, auto-format and validate changes for data teams.
     \item Construing a simplified architecture today through which the Snowflake permissions of teams can be simplified, unified, and are protected by pull-request validations to ensure company compliance is attained.
     \item Implement quality gates for IaC settings using Python scripts.
     \item Help data teams solve their storage- and permission-related issues through ServiceNow. The questions are either conceptual or require aid with respect to pull request.
-  \end{itemize}
-\textit{Technologies}: Azure Storage (Storage Account, ADLS), .NET 8, Python, Snowflake, Terraform, Azure Pipelines, ServiceNow
-	
-\textbf{.NET Software Developer} (June 2023 - December 2023) \\
-CZ (Tilburg) via \textbf{Freshminds} (Leiden) \\
-I worked as full-stack software developer for health insurance CZ. The goal was to develop an internal automation tool that will save the Integration Team \textasciitilde 2 days of work to publish a new service to IBM ACE. My solution was an intuitive web application that generates the required files automatically, based on the type of application and configurable parameters, in Azure Devops repositories. \\
-\textit{Responsibilities \& Achievements}
-\begin{itemize}
-    \item Autonomously implement the modular MVP application (backend and frontend) in four months.
+  }
+  {
+    \tech{Azure Storage} (Storage Account, ADLS), 
+    \tech{.NET 8}, 
+    \tech{Python}, 
+    \tech{Snowflake}, 
+    \tech{Terraform}, 
+    \tech{Azure Pipelines}, 
+    \tech{ServiceNow}
+  }
+
+\workentry
+{.NET Software Developer}
+{June 2023 -- December 2023}
+{CZ (Tilburg) via \textbf{Freshminds} (Leiden)}
+{I worked as full-stack software developer for health insurance CZ. The goal was to develop an internal automation tool that will save the Integration Team \textasciitilde 2 days of work to publish a new service to IBM ACE. My solution was an intuitive web application that generates the required files automatically, based on the type of application and configurable parameters, in Azure Devops repositories. \\
+}
+    {\item Autonomously implement the modular MVP application (backend and frontend) in four months.
     \item Present updates and application demo biweekly, with ensuing brainstorm session on feature request and UX improvements.
     \item Well-designed and documented APIs for all backend modules.
     \item Automated test suite for back- and frontend and CI/CD street from Azure Pipelines.
     \item Host application on private network in Azure, reachable from On-Prem network.
-\end{itemize}
-\textit{Technologies}: C\#, MVC, Azure, MSSQL, Bicep, JQuery, TailwindCSS, Archimate, Hub Spoke Architecture, CI/CD, Scrum, REST APIs, XML
+}
+{ \tech{C\#}, \tech{MVC}, \tech{Azure}, \tech{MSSQL}, \tech{Bicep}, \tech{JQuery}, \tech{TailwindCSS}, \tech{Archimate}, \tech{Hub Spoke Architecture}, \tech{CI/CD}, \tech{Scrum}, \tech{REST APIs}, \tech{XML}}
 
-\textbf{.NET Software Developer / DevOps Engineer} (Feb 2022 - Mar 2023) \\
-\textbf{PayByLink} (Ede) via \textbf{Xebia | Xpirit} (Hilversum) \\
- I was responsible for the implementation of feature requests, operations, and implementation of quality gates, Infra-As-Code deployments, and API integrations with payment service providers.\\
-\textit{Technologies}: .NET Standard, .NET Framework, Resource Files (.resx), CSS3, Javascript, Azure Function Apps, MSSQL, database migrations.
+\workentry
+{.NET Software Developer / DevOps Engineer}
+{Feb 2022 -- Mar 2023}
+{PayByLink (Ede) via \textbf{Xebia | Xpirit} (Hilversum)}
+{I was responsible for the implementation of feature requests, operations, and implementation of quality gates, Infra-As-Code deployments, and API integrations with payment service providers.}
+{
+\item Bla
+\item Bla
+}
+{\tech{.NET Standard} \tech{.NET Framework} \tech{Resource Files} (.resx) \tech{CSS3} \tech{Javascript} \tech{Azure Function Apps} \tech{MSSQL} \tech{database migrations}.
+}
 
-
-\textbf{.NET Software Developer / Azure Cloud Engineer} (Sep 2020 - Mar 2023) \\
-\textbf{Taqa} (Alkmaar) via \textbf{Xebia | Xpirit} \\
- I was responsible for the configuration of a complex Kubernetes cluster, CI/CD pipelines. 
- I also made structural changes to the Invoice service and Allocation service which calculates how much gas should flow through the gas pipeline hour by hour. I ensured that allocated quantities in the past can never change and rigorously tested these features using Specflow. \\
- \begin{itemize}
+\workentry
+{.NET Software Developer / Azure Cloud Engineer}
+{Sep 2020 -- Mar 2023}
+{Taqa (Alkmaar) via \textbf{Xebia | Xpirit}}
+{ I was responsible for the configuration of a complex Kubernetes cluster, CI/CD pipelines. 
+ I also made structural changes to the Invoice service and Allocation service which calculates how much gas should flow through the gas pipeline hour by hour. I ensured that allocated quantities in the past can never change and rigorously tested these features using Specflow.}
+{
  \item Ensure IaC is idempotent and can be rolled out from scratch again.
  \item Failover pipelines working flawlessly
  \item Roll out reliable Kubernetes comfiguration and keep AKS cluster up to date
   \item Mitigating vulnerabilities found in Azure Defender
- \end{itemize}
-\textit{Technologies}: Azure (ACR, AKS, Service Bus, Defender, Storage, MSSQL, Log Analytics and more), Azure Devops, C\#,  Microservices, Event Driven Architecture, Docker, Kubernetes, High Availability with failovers, Specflow, MSTest, git, TDD. 
+}
+{
+    \tech{Azure} (ACR, AKS, Service Bus, Defender, Storage, MSSQL, Log Analytics and more)
+    \tech{Azure Devops} 
+    \tech{C\#} 
+    \tech{Microservices} 
+    \tech{Event Driven Architecture} 
+    \tech{Docker} 
+    \tech{Kubernetes} 
+    \tech{High Availability with failovers} 
+    \tech{Specflow} 
+    \tech{MSTest} 
+    \tech{git} 
+    \tech{TDD}. 
+}
 
-Cloud Engineer trainee (Aug 2020 - April 2021) \\
-\textbf{Xccelerated} (Amsterdam) \\
-\ \ \ Azure Cloud engineering Bootcamp for people with prior experience in software development. This involved a full-time month followed by a year with trainings on Mondays.  The rest of the week I was working at Xebia | Xpirit. \\
-\textit{Technologies}: Azure architecture, Docker, Kubernetes, Terraform, Bicep, .NET, unit/integration tests
+\workentryshort
+{Cloud Engineer trainee}
+{Aug 2020 -- April 2021}
+{Xccelerated (Amsterdam)}
+{Azure Cloud engineering Bootcamp for people with prior experience in software development. This involved a full-time month followed by a year with trainings on Mondays.  The rest of the week I was working at Xebia | Xpirit.
+}
+{
+    \tech{Azure architecture}, 
+    \tech{Docker}, 
+    \tech{Kubernetes}, 
+    \tech{Terraform}, 
+    \tech{Bicep}, 
+    \tech{.NET}, 
+    \tech{Unit tests}
+    \tech{Integration tests}
+}
 
-C++ Software Developer (Oct 2018 - April 2020) \\
-\textbf{Rohill Engineering B.V.} (Hoogeveen) \\
-\ \ \ Developed and maintained mission-critical communication products that comply with the TETRA protocol. Worked on voice-logging products, gateways and the core TetraNode solution in an agile environment. \\
-\textit{Technologies}: C++, Python, Linux, UML, PostgreSQL, db failovers, SVN, Jira.
+\workentryshort
+{C++ Software Developer}
+{Oct 2018 -- April 2020}
+{Rohill Engineering B.V. (Hoogeveen)}
+{Developed and maintained mission-critical communication products that comply with the TETRA protocol. Worked on voice-logging products, gateways and the core TetraNode solution in an agile environment.
+}
+{
+    \tech{C++}, 
+    \tech{Python}, 
+    \tech{Linux}, 
+    \tech{UML}, 
+    \tech{PostgreSQL}, 
+    \tech{DB failovers}, 
+    \tech{SVN}, 
+    \tech{Jira}.
+}
 
 \begin{tabular}{l}	
 Teacher and Summary writer (Oct 2018 - Dec 2019) \\
@@ -214,75 +416,11 @@ Practical Assistant (2013 - 2016) \\
  \item{Physics Laboratory 1 (Sep 2013 - Nov 2013).
  \end{itemize}
  
- \begin{tabular}{l}
-Student Mentor (2013 - 2014) \\ 
-\textbf{University of Groningen}\\
-\ \ \ {\small Guided a group of first year physics students.} \\
-
-\ \ \ {\small Informed them about university policies and career prospects as a physicist.}
-\end{tabular}
-
-\section{Programming/IT Skills}
-\begin{tabular}{||p{5cm}|p{8cm}||}
-\hline
-Backend Programming: &  .NET (C\# 5.0+, MVC, CORE), Python, Git, Archimate \\
-\hline
-Frontend Programming: & HTML 5.0, CSS3, Svelte, Tailwind, Typescript, React \\
-\hline
-.NET:& Event Driven Architecture, Domain Driven Design, ASP.NET Identity, Microservices, Structured Logging, SignalR, Entity Framework, LINQ, Restful APIs, Razor, Blazor, XUnit, NUnit, MSTest, FluentAssertions \& Validations, SpecFlow, MOQ, Swagger, Polly, Pulumi \\
-\hline
-DevOps: & Azure Pipelines, Gitlab, Github Actions, CI\/CD, Git, Agile Scrum, Shell and Python scripting, SonarCloud, Whitesource, Ansible, Jenkins, IaC (Terraform, Bicep, ARM), Dashboards \\
-\hline
-Azure Cloud: & KeyVaults, Storage Accounts, App Services, Static Web Apps,
-Managed Identity, AD Active Directory (Entra), Azure
-Container Apps, ACR, AKS,
-Application Insights, Log Analytics Workspaces,
-SignalR, Service Bus, Event Hubs, Sendgrid, Redis,
-Azure Functions, Alerts and Action Groups, Logic Apps,
-SQL Server \& Elastic Pool, VNETs, Network Security Groups,
-Azure AI Search (Cognitive Search), Azure OpenAI Service \\
-\hline
-Containerization: & Docker, Kubernetes, AKS, ACR, Container Apps \\
-\hline
-Databases: & MSSQL, Snowflake, PostgreSQL, MySQL, GraphQL \\
-\hline
-UNIX: & Command-line utilities (e.g. \verb|grep|, \verb|locate|, \verb|awk|, \verb|sed|), File System Management, Package Management, System Administration \\
-\hline
-Tools \& IDEs: & Jetbrain Rider, Visual Studio (Code), Vim, Nano, Postman, Slack, Teams \\
-\hline
-Miscellaneous: & \LaTeX \\
-\hline
-\end{tabular}
-
-%Section: Scholarships and additional info
-\section{Certificates and licenses}
-My certificates can be found \hyperlink{https://www.credly.com/users/casper-dijkstra/badges}{here} and \hyperlink{https://learn.microsoft.com/en-us/users/casperdijkstra-0464/transcript/v2n6nap36zq90xk?tab=credentials-tab}{here}.
-
-\begin{tabular}{l l}
-HashiCorp Certified: Terraform Associate(003) & (HashiCorp, 2024) \\
-AI-102: Azure AI Engineer Associate & (Microsoft, 2024) \\
-AI-900: Azure AI Fundamentals & (Microsoft, 2024) \\
-DP-900: Microsoft Azure Data Fundamentals  &(Microsoft, 2024) \\
-Docker Certified Associate & (Docker, 2023) \\
-Linux Foundation Certified Systems Administrator & (Linux Foundation, 2023) \\
-CKAD: Certified Kubernetes Application Developer & (Linux Foundation, 2022) \\
-CKA: Certified Kubernetes Administrator & (Linux Foundation, 2022) \\
-HashiCorp Certified: Terraform Associate(002) &(HashiCorp, 2023) \\
-Azure Solutions Architect Expert & (Microsoft, 2022) \\
-AZ-305: Designing Microsoft Azure Infrastructure Solutions & (Microsoft, 2022) \\
-AZ-500: Azure Security Engineer Associate & (Microsoft, 2022) \\
-AZ-104 Microsoft Certified: Azure Developer Associate & (Microsoft, 2021) \\
-AZ-204: Azure Administrator Associate certification & (Microsoft, 2021) \\
-Microsoft Certified: DevOps Engineer Expert & (Microsoft, 2021) \\
-AZ-400: Designing and Implementing Microsoft DevOps Solutions & (Microsoft, 2021) \\
-    Driver's licence - A/B & (2019 \& 2010)
-\end{tabular}
-
 %Section: Education
-\section{Education}
+\section{\faGraduationCap\ Education}
 \begin{tabular}{l}
 MSc \textsc{Theoretical Physics} (2015 -- 2018), \textbf{University of Groningen}. (8.2/10).\\
-\ \ \textit{Exchange program at} \textbf{Osaka University} - focused on nuclear physics and thermal field theory. \\
+\ \ \textit{Exchange program at} \textbf{Osaka University} - nuclear physics and Japanese language \\
 \ \ \textit{Completed Frank Brokken's C++ courses} (9.0/10)
 \\ \\
  MA \textsc{Philosophy of a Specific Discipline} (2015 -- 2018),
@@ -290,14 +428,14 @@ MSc \textsc{Theoretical Physics} (2015 -- 2018), \textbf{University of Groningen
 \ \ \textit{Specialization: philosophy of the natural sciences.}
 \\ \\
  BSc \textsc{Theoretical Physics} (2010 --  2015), \textbf{University of Groningen}. (7.2/10).\\ 
-\ \ \textit{Exchange program at} \textbf{Stockholm University} - focused on mathematical physics. \\
+\ \ \textit{Exchange program at} \textbf{Stockholm University} - mathematical physics and particle physics. \\
  \\
  BA \textsc{Philosophy of a Specific Discipline} (2012 --  2015), \textbf{University of Groningen}. (7.0/10). \\
 \ \  \textit{Specialization: philosophy of the natural sciences.}
 \end{tabular}
 
 %Section: Languages
-\section{Languages}
+\section{\faCommenting\ Languages}
 \begin{tabular}{rl}
  \textsc{Dutch:}&Mother tongue\\
 \textsc{English:}&Fluent (TOEFL iBT test: 102/120)\\
@@ -305,8 +443,8 @@ MSc \textsc{Theoretical Physics} (2015 -- 2018), \textbf{University of Groningen
 \end{tabular}
 
 
-\section{Interests}
-Casper's interests are as diverse as they are captivating. He loves to cook dishes from various cuisines, with a preference for Italian, Thai and Indian food. Moreover, he is an enthusiast when it comes to immersive, strategical board games. His top picks include Terra Mystica, Orléans and Great Western Trail.
+\section{\faDice\ Hobbies \& Interests}
+Casper's interests are as diverse as they are captivating. He loves to cook dishes from various cuisines, with a preference for Italian, Thai and Indian food. Moreover, he is an enthusiast for immersive and strategic board games. His top picks include Terra Mystica, Orl\'{e}ans and Great Western Trail.
 
 Beyond tabletop adventures, Casper has a more adventurous side. He likes to do sports a few times a week, including bouldering, wakeboarding and kitesurfing. He loves to travel as well to places in Europe, South America and Asia.
 \end{document}
